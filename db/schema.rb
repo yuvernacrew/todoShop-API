@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_125236) do
+ActiveRecord::Schema.define(version: 2019_10_20_155330) do
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "target_at"
+    t.integer "point"
+    t.boolean "completed", default: false, null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "point"
+    t.boolean "completed", default: false, null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_rewards_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -21,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_10_20_125236) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "access_token"
+    t.integer "point"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
