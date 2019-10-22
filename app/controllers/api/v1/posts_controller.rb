@@ -54,8 +54,13 @@ module Api
       end
 
       def add_point(post)
-        User.find(post.user_id).point = User.find(post.user_id).point + post.point
-        return true
+        @user = User.find(post.user_id)
+        @user.point = @user.point + post.point
+        if @user.save
+          return true
+        else 
+          return false
+        end
       end
 
       def post_params

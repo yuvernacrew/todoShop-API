@@ -4,7 +4,7 @@ class CreateRewards < ActiveRecord::Migration[5.2]
       # ご褒美のタイトル
       t.string :title, null: false
       # 何ポイントのご褒美か
-      t.integer :point, null: true
+      t.integer :point, null: false, default: 0
       # ご褒美をもらったか (trueになったらget ポイントが減る処理)
       t.boolean :completed, null: false, default: false
       # user tableに紐付け (外部キー制約あり)
