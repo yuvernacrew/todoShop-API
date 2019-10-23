@@ -10,7 +10,7 @@ module Api
       end
 
       def show
-        render json: { status: 'SUCCESS', message: 'Loaded the post', data: @post }
+        render json: { status: 'SUCCESS', message: 'Loaded the post', data: post }
       end
 
       def create
@@ -34,6 +34,17 @@ module Api
         end
       end
 
+      def complete
+        user = User.find(@post.user_id)
+        user.point = user.point - @post.point
+        if user.save
+          @post.destroy
+          render json: { status: 'SUCCESS', message: 'ご褒美を手に入れました', data: @post }
+        else
+          render json: { status: 'ERROR', data: post.errors }
+        end
+      end
+
       def destroy
         @post.destroy
         render json: { status: 'SUCCESS', message: 'Deleted the post', data: @post.point }
@@ -51,16 +62,6 @@ module Api
 
       def set_post
         @post = Post.find(params[:id])
-      end
-
-      def add_point(post)
-        @user = User.find(post.user_id)
-        @user.point = @user.point + post.point
-        if @user.save
-          return true
-        else 
-          return false
-        end
       end
 
       def post_params
