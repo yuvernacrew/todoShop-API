@@ -6,17 +6,14 @@ Rails.application.routes.draw do
       resource :login, only: [:create], controller: :sessions
       resource :users, only: [:create]
       resources :posts do 
-        # 一つのコレクションを対象にアクション追加
-        member do
-        end
-
         # 全コレクションを対象にアクション追加
         collection do
           post 'complete'
         end
       end
       resources :rewards do
-        collection do
+        collection do 
+          post 'getReword'
         end
       end
     end

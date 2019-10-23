@@ -1,7 +1,7 @@
 module Api
   module V1
     class RewardsController < ApplicationController
-      before_action :set_reward, only: [:show, :update, :destroy, :get_reword]
+      before_action :set_reward, only: [:show, :update, :destroy, :getReword]
       skip_before_action :authenticate_user_from_token!
 
       def index
@@ -22,7 +22,7 @@ module Api
         end
       end
 
-      def get_reword
+      def getReword
         user = User.find(@reward.user_id)
         user.point = user.point - @reward.point
         if user.save
