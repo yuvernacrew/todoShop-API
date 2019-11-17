@@ -1,7 +1,7 @@
 module Api
   module V1
     class RewardsController < ApplicationController
-      before_action :set_reward, only: [:show, :update, :destroy, :getReword]
+      before_action :set_reward, only: [:show, :update, :destroy, :getReward]
       skip_before_action :authenticate_user_from_token!
 
       def index
