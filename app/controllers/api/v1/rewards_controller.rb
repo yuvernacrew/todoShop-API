@@ -22,7 +22,7 @@ module Api
         end
       end
 
-      def getReword
+      def getReward
         user = User.find(@reward.user_id)
         user.point = user.point - @reward.point
         if user.save

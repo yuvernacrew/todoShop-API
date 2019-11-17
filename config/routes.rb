@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
       resources :rewards do
         collection do 
-          post 'getReword'
+          post 'getReward'
         end
       end
     end
