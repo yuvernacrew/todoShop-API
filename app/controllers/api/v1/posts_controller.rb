@@ -23,23 +23,11 @@ module Api
       end
 
       def complete
-        if User.find(@post.user_id)
-          if @post.destroy && add_point(@post)
-            render json: { status: 'SUCCESS', message: 'Deleted the post', data: @post }
-          else
-            render json: { status: 'ERROR', data: post.errors }
-          end
-        else
-          render json: { status: 'ERROR', data: post.errors }
-        end
-      end
-
-      def complete
         user = User.find(@post.user_id)
-        user.point = user.point - @post.point
+        user.point = user.point + @post.point
         if user.save
           @post.destroy
-          render json: { status: 'SUCCESS', message: 'ご褒美を手に入れました', data: @post }
+          render json: { status: 'SUCCESS', message: 'TODO達成！', data: @post }
         else
           render json: { status: 'ERROR', data: post.errors }
         end
